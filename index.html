@@ -1,15 +1,75 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>MyDockerApp</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jenkins Installation and Build Guide</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        pre {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            padding: 10px;
+            overflow: auto;
+        }
+        code {
+            font-family: Consolas, "Courier New", Courier, monospace;
+            color: #e74c3c;
+        }
+    </style>
 </head>
-<style>
-
-</style>
-
 <body>
+    <h1>Jenkins Installation and Build Guide</h1>
 
-<h1>New Heading</h1>
-<p>My first paragraph.</p>
+    <h2>Installation</h2>
+    <p>To install Jenkins, follow these steps:</p>
+    <pre><code>
+# Download the key
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
 
+# Add the key into apt repository
+echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
+    https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+    /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+# Install Jenkins
+sudo apt-get update
+sudo apt-get install fontconfig openjdk-17-jre
+sudo apt-get install jenkins
+
+# Check the Jenkins service status
+sudo systemctl status jenkins
+
+# Start the Jenkins service
+sudo systemctl start jenkins
+
+# Enable Jenkins service to start on boot
+sudo systemctl enable jenkins
+
+# Visit the localhost:8080 URL to install required Jenkins plugins
+    </code></pre>
+
+    <h2>Build Using Jenkins</h2>
+    <p>To build using Jenkins, use the following commands:</p>
+    <pre><code>
+# Remove existing service
+docker service rm mywebsite
+
+# Remove existing image
+docker image rm mywebsite
+
+# Build the image with the latest changes
+docker build -t mywebsite .
+
+# Create a service for running the latest changes
+docker service create --name mywebsite --replicas 5 -p 8000:80 mywebsite
+    </code></pre>
 </body>
 </html>
