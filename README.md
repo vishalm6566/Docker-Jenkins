@@ -51,7 +51,10 @@
 
 
 ## if not work on jenkins
+
+```bash
 # remove existing service
+
 #sudo /usr/bin/docker service rm mywebsite
 
 # remove existing image
@@ -62,3 +65,8 @@ sudo /usr/bin/docker build -t mywebsite /home/sunbeam/Desktop/sunbeam/rought/os/
 
 # create a service for running the latest changes
 sudo /usr/bin/docker service create --name mywebsite --replicas 1 -p 8000:80 mywebsite
+
+```
+
+
+##Note : if these above two cmds not worked properly then try removing service and image from your system and then try again.
